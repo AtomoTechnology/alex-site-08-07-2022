@@ -32,4 +32,9 @@ const props = defineProps({
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width: 500px) {
+  .text-brand {
+    font-size: 25px;
+  }
+}
 </style>

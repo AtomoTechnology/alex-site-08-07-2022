@@ -66,7 +66,7 @@ body {
   /* color: var(--color-text); */
   /* background: var(--color-background); */
   /* transition: color 0.5s, background-color 0.5s; */
-  background-color: rgb(239, 239, 239);
+  background-color: rgb(216, 216, 216);
   line-height: 1.6;
   /* font-family: 'Noto Sans', sans-serif; */
   font-family: Arial, Helvetica, sans-serif;
@@ -74,4 +74,14 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.bg-g-primary {
+  background: rgb(2, 90, 145);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 90, 145, 0.3034255938703606) 0%,
+    rgba(0, 132, 244, 0.8608485630580357) 0%,
+    rgba(2, 30, 36, 0.6787757339263831) 100%
+  );
 }

@@ -1,27 +1,12 @@
 <script setup>
 import AppButton from '@/components/AppButton.vue';
 import BrandHeader from '@/components/BrandHeader.vue';
+import Navbar from '@/components/Navbar.vue';
 </script>
 <template>
   <header class="">
-    <div class="menu flex justify-between px-6 text-white py-6 items-center">
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" />
-      <div class="wrapper hidden sm:flex">
-        <nav class="flex gap-6 mr-8 items-center text-white">
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/">about</RouterLink>
-          <RouterLink to="/">Services</RouterLink>
-          <RouterLink to="/">Contact Us</RouterLink>
-          <RouterLink to="/">Last One</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-          <RouterLink class="rounded-full bg-white px-4 py-1 text-gray-800 shadow" to="/about">Donner</RouterLink>
-        </nav>
-      </div>
-      <!-- <div class="user-logged">user</div> -->
-    </div>
-
     <section
-      class="showcase p-6 relative sm:abolsute container sm:ml-12 h-full justify-center sm:-mt-12 w-full sm:w-72 gap-4 flex flex-col"
+      class="showcase p-6 relative sm:abolsute container sm:ml-12 h-full justify-center w-full sm:w-72 gap-4 flex flex-col"
     >
       <span class="text-white">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur cupiditate, atque totam molestias velit
