@@ -1,19 +1,12 @@
-const user = require('../db/models/user');
-const role = require('../db/models/role');
-const catchAsync = require('../helpers/error/catchAsync');
+const prayer = require('../db/models/prayerpetition');
 const { Op } = require("sequelize");
+const catchAsync = require('../helpers/error/catchAsync');
 
 exports.GetAll = async(req, res) => {
-    user.findAll({
-        attributes: ['id', "roleId", 'firstname', 'lastname', 'createdAt', "email", "adress", "updatedAt", 'phone', 'state'],
-        include:[
-            {
-                model: role,              
-                where:{
-                    state: 1
-                },
-                required: true
-            }] ,
+    const {
+        filter
+    } = req.params;
+    prayer.findAll({
         where: {
             state: 1
         },
@@ -25,22 +18,17 @@ exports.GetAll = async(req, res) => {
     })
 }
 
+
 exports.GetById = async(req, res) => {
-    const { id } = req.params;
-    user.findOne({
-        include:[
-            {
-                model: role,              
-                where:{
-                    state: 1
-                },
-                required: true
-            }],
+    const {
+        filter
+    } = req.params;
+    prayer.findOne({
         where: {
             [Op.and]:
             [
                 {
-                    id: id
+                    id: req.id
                 },
                 {
                     state: 1
@@ -55,25 +43,40 @@ exports.GetById = async(req, res) => {
     })
 }
 
+exports.Create = catchAsync(async (req, res, next) => {
+    try {  
+      await prayer.create(req.body);    
+      res.status(201).json({
+        status: true,
+        message:"VOTRE demande de prière a été créée avec succès."
+      });
+    } catch (error) {
+      return res.status(402).json({
+        status: false,
+        message:"Votre demande de prière n'a pas pu être créée.",
+        error:error
+      });
+    }
+});
+
 exports.Update = catchAsync(async (req, res, next) => {
     try {  
-      await user.update(
+      await prayer.update(
         {
-            firstname: req.firstname,
-            lastname:req.lastname,
+            description: req.description,
             phone:req.phone,
-            adress:req.adress
+            email:req.email
         },
         {where: {id: req.id}}
         );    
       res.status(201).json({
         status: true,
-        message:"Vos données utilisateur ont été mises à jour avec succès."
+        message:"VOTRE demande de prière a été mise à jour avec succès."
       });
     } catch (error) {
       return res.status(402).json({
         status: false,
-        message:"Vos données utilisateur n'ont pas pu être mises à jour avec succès.",
+        message:"Votre demande de prière n'a pas pu être mise à jour.",
         error:error
       });
     }
@@ -81,7 +84,7 @@ exports.Update = catchAsync(async (req, res, next) => {
 
 exports.Delete = catchAsync(async (req, res, next) => {
     try {  
-      await user.update(
+      await prayer.update(
         {
             state: 2
         },
@@ -89,14 +92,13 @@ exports.Delete = catchAsync(async (req, res, next) => {
         );    
       res.status(201).json({
         status: true,
-        message:"Vos données utilisateur ont été supprimées avec succès."
+        message:"VOTRE demande de prière a été supprimée avec succès."
       });
     } catch (error) {
       return res.status(402).json({
         status: false,
-        message:"Vos données d'utilisateur n'ont pas pu être supprimées.",
+        message:"Votre demande de prière n'a pas pu être supprimée.",
         error:error
       });
     }
 });
-
