@@ -29,7 +29,7 @@ KnowledgeUser.init(
       allowNull: false,
     },
     nivel: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     state: {
